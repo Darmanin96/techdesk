@@ -1,0 +1,41 @@
+.shell-container {
+  height: 100vh;
+}
+
+.shell-sidenav {
+  width: 220px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.shell-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.active-link {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.shell-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.shell-toolbar-title {
+  margin-left: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.shell-spacer {
+  flex: 1 1 auto;
+}
+
+.shell-content {
+  padding: 24px;
+}
