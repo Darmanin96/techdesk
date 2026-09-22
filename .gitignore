@@ -1,0 +1,22 @@
+# Dependencias
+node_modules/
+**/node_modules/
+
+# Variables de entorno
+.env
+**/.env
+
+# Builds
+/backend/dist/
+/frontend/dist/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Angular
+/frontend/.angular/
+
+# Editor / SO
+.vscode/
+.DS_Store
