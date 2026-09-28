@@ -1,5 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,6 +19,7 @@ import {
   selector: 'app-incidencias',
   imports: [
     RouterLink,
+    MatButtonModule,
     MatCardModule,
     MatTableModule,
     MatFormFieldModule,
