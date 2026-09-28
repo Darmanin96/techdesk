@@ -1,0 +1,123 @@
+<<a mat-button routerLink="/incidencias" class="volver">
+  <mat-icon>arrow_back</mat-icon>
+  Volver a incidencias
+</a>
+
+@if (incidencia; as inc) {
+  <header class="cabecera">
+    <span class="ticket">{{ inc.ticket }}</span>
+    <h1>{{ inc.asunto }}</h1>
+    <div class="chips">
+      <span [class]="'chip ' + prioridad()">{{ etiquetasPrioridad[prioridad()] }}</span>
+      <span class="chip-estado">{{ etiquetasEstado[estado()] }}</span>
+    </div>
+  </header>
+
+  <div class="columnas">
+    <div class="columna-principal">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Descripción</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="descripcion">{{ inc.descripcion }}</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Comentarios</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          @for (c of comentarios(); track $index) {
+            <div class="comentario">
+              <div class="comentario-cabecera">
+                <strong>{{ c.autor }}</strong>
+                <span>{{ c.fecha }}</span>
+              </div>
+              <p>{{ c.texto }}</p>
+            </div>
+          } @empty {
+            <p class="vacio">Todavía no hay comentarios.</p>
+          }
+
+          <mat-form-field appearance="outline" class="campo-comentario">
+            <mat-label>Añadir comentario</mat-label>
+            <textarea
+              matInput
+              rows="3"
+              [value]="nuevoComentario()"
+              (input)="nuevoComentario.set($any($event.target).value)"
+            ></textarea>
+          </mat-form-field>
+          <button mat-flat-button (click)="anadirComentario()" [disabled]="!nuevoComentario().trim()">
+            Comentar
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="columna-lateral">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Detalles</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <dl class="detalles">
+            <dt>Cliente</dt>
+            <dd>{{ inc.cliente }}</dd>
+            <dt>Dispositivo</dt>
+            <dd>{{ inc.dispositivo }}</dd>
+            <dt>Técnico</dt>
+            <dd>{{ inc.tecnico ?? 'Sin asignar' }}</dd>
+            <dt>Fecha de creación</dt>
+            <dd>{{ inc.fecha }}</dd>
+          </dl>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select [value]="estado()" (selectionChange)="cambiarEstado($event.value)">
+              @for (e of estados; track e) {
+                <mat-option [value]="e">{{ etiquetasEstado[e] }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Prioridad</mat-label>
+            <mat-select [value]="prioridad()" (selectionChange)="cambiarPrioridad($event.value)">
+              @for (p of prioridades; track p) {
+                <mat-option [value]="p">{{ etiquetasPrioridad[p] }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Historial</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          @for (h of historial(); track $index) {
+            <div class="cambio">
+              <mat-icon>history</mat-icon>
+              <div>
+                <div>
+                  <strong>{{ h.campo }}</strong>: {{ h.anterior }} → {{ h.nuevo }}
+                </div>
+                <small>{{ h.autor }} · {{ h.fecha }}</small>
+              </div>
+            </div>
+          } @empty {
+            <p class="vacio">Sin cambios registrados.</p>
+          }
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+} @else {
+  <mat-card appearance="outlined" class="no-encontrada">
+    <mat-card-content>No se ha encontrado la incidencia.</mat-card-content>
+  </mat-card>
+}

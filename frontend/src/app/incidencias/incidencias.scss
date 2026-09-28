@@ -1,0 +1,119 @@
+$critica: #c62828;
+$alta: #1565c0;
+$media: #757575;
+$baja: #2e7d32;
+
+.titulo-pagina {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .filtro-busqueda {
+    flex: 1 1 280px;
+  }
+
+  mat-form-field:not(.filtro-busqueda) {
+    flex: 0 1 200px;
+  }
+}
+
+.vacio {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.tabla-escritorio {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+  }
+}
+
+.chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &.critica { background: rgba($critica, 0.12); color: $critica; }
+  &.alta    { background: rgba($alta, 0.12);    color: $alta; }
+  &.media   { background: rgba($media, 0.15);   color: $media; }
+  &.baja    { background: rgba($baja, 0.12);    color: $baja; }
+}
+
+.lista-movil {
+  display: none;
+}
+
+.incidencia-card {
+  margin-bottom: 12px;
+  border-left-width: 4px;
+
+  &.critica { border-left-color: $critica; }
+  &.alta    { border-left-color: $alta; }
+  &.media   { border-left-color: $media; }
+  &.baja    { border-left-color: $baja; }
+}
+
+.incidencia-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.incidencia-asunto {
+  margin: 8px 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.incidencia-meta {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.incidencia-pie {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 959px) {
+  .tabla-escritorio {
+    display: none;
+  }
+
+  .lista-movil {
+    display: block;
+  }
+
+  .filtros mat-form-field:not(.filtro-busqueda) {
+    flex: 1 1 140px;
+  }
+}
+
+.fila-click {
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.incidencia-card {
+  cursor: pointer;
+}
