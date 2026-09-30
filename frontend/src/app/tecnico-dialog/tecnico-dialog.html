@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ data ? 'Editar técnico' : 'Nuevo técnico' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <mat-dialog-content class="formulario">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error>El nombre es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellidos</mat-label>
+      <input matInput formControlName="apellidos" />
+      <mat-error>Los apellidos son obligatorios</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="completo">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+      @if (form.controls.email.hasError('required')) {
+        <mat-error>El email es obligatorio</mat-error>
+      } @else if (form.controls.email.hasError('email')) {
+        <mat-error>Introduce un email válido</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="completo">
+      <mat-label>Especialidad</mat-label>
+      <input matInput formControlName="especialidad" placeholder="Ej. Redes, Servidores, Puestos de trabajo" />
+      <mat-error>La especialidad es obligatoria</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="completo">
+      <mat-label>Teléfono</mat-label>
+      <input matInput formControlName="telefono" />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    <button mat-flat-button type="submit">Guardar</button>
+  </mat-dialog-actions>
+</form>

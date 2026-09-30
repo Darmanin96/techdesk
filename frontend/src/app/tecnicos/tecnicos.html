@@ -1,1 +1,90 @@
-<p>tecnicos works!</p>
+<div class="cabecera-pagina">
+  <h1 class="titulo-pagina">Técnicos</h1>
+  <button mat-flat-button (click)="nuevo()">
+    <mat-icon>add</mat-icon>
+    Nuevo técnico
+  </button>
+</div>
+
+<mat-form-field appearance="outline" class="filtro-busqueda">
+  <mat-label>Buscar</mat-label>
+  <mat-icon matPrefix>search</mat-icon>
+  <input
+    matInput
+    placeholder="Nombre, especialidad o email"
+    [value]="busqueda()"
+    (input)="busqueda.set($any($event.target).value)"
+  />
+</mat-form-field>
+
+@if (filtrados().length === 0) {
+  <mat-card appearance="outlined" class="vacio">
+    <mat-card-content>No hay técnicos que coincidan con la búsqueda.</mat-card-content>
+  </mat-card>
+} @else {
+  <!-- Escritorio: tabla -->
+  <mat-card appearance="outlined" class="tabla-escritorio">
+    <table mat-table [dataSource]="filtrados()">
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let t">{{ t.nombre }} {{ t.apellidos }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="especialidad">
+        <th mat-header-cell *matHeaderCellDef>Especialidad</th>
+        <td mat-cell *matCellDef="let t">{{ t.especialidad }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let t">{{ t.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="telefono">
+        <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+        <td mat-cell *matCellDef="let t">{{ t.telefono || '—' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let t" class="acciones">
+          <button mat-icon-button (click)="editar(t)" aria-label="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="eliminar(t)" aria-label="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+  </mat-card>
+
+  <!-- Móvil: cards -->
+  <div class="lista-movil">
+    @for (t of filtrados(); track t.id) {
+      <mat-card appearance="outlined" class="tecnico-card">
+        <mat-card-content>
+          <div class="tecnico-cabecera">
+            <strong>{{ t.nombre }} {{ t.apellidos }}</strong>
+            <div>
+              <button mat-icon-button (click)="editar(t)" aria-label="Editar">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="eliminar(t)" aria-label="Eliminar">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <p class="tecnico-especialidad">{{ t.especialidad }}</p>
+          <div class="tecnico-contacto">
+            <span>{{ t.email }}</span>
+            <span>{{ t.telefono || 'Sin teléfono' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+}

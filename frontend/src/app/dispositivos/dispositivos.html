@@ -1,1 +1,92 @@
-<p>dispositivos works!</p>
+<div class="cabecera-pagina">
+  <h1 class="titulo-pagina">Dispositivos</h1>
+  <button mat-flat-button (click)="nuevo()">
+    <mat-icon>add</mat-icon>
+    Nuevo dispositivo
+  </button>
+</div>
+
+<mat-form-field appearance="outline" class="filtro-busqueda">
+  <mat-label>Buscar</mat-label>
+  <mat-icon matPrefix>search</mat-icon>
+  <input
+    matInput
+    placeholder="Tipo, marca, modelo, nº de serie o cliente"
+    [value]="busqueda()"
+    (input)="busqueda.set($any($event.target).value)"
+  />
+</mat-form-field>
+
+@if (filtrados().length === 0) {
+  <mat-card appearance="outlined" class="vacio">
+    <mat-card-content>No hay dispositivos que coincidan con la búsqueda.</mat-card-content>
+  </mat-card>
+} @else {
+  <!-- Escritorio: tabla -->
+  <mat-card appearance="outlined" class="tabla-escritorio">
+    <table mat-table [dataSource]="filtrados()">
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let d">{{ d.tipo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef>Marca</th>
+        <td mat-cell *matCellDef="let d">{{ d.marca }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef>Modelo</th>
+        <td mat-cell *matCellDef="let d">{{ d.modelo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="numeroSerie">
+        <th mat-header-cell *matHeaderCellDef>Nº de serie</th>
+        <td mat-cell *matCellDef="let d">{{ d.numeroSerie }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+        <td mat-cell *matCellDef="let d">{{ d.cliente }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let d" class="acciones">
+          <button mat-icon-button (click)="editar(d)" aria-label="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="eliminar(d)" aria-label="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+  </mat-card>
+
+  <!-- Móvil: cards -->
+  <div class="lista-movil">
+    @for (d of filtrados(); track d.id) {
+      <mat-card appearance="outlined" class="dispositivo-card">
+        <mat-card-content>
+          <div class="dispositivo-cabecera">
+            <strong>{{ d.marca }} {{ d.modelo }}</strong>
+            <div>
+              <button mat-icon-button (click)="editar(d)" aria-label="Editar">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="eliminar(d)" aria-label="Eliminar">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <p class="dispositivo-tipo">{{ d.tipo }} · {{ d.numeroSerie }}</p>
+          <div class="dispositivo-cliente">{{ d.cliente }}</div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+}
