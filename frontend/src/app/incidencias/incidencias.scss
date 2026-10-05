@@ -1,52 +1,107 @@
-$critica: #c62828;
-$alta: #1565c0;
-$media: #757575;
-$baja: #2e7d32;
+$critica: #ef4444;
+$alta: #2563eb;
+$media: #f59e0b;
+$baja: #10b981;
 
-.titulo-pagina {
-  margin: 0 0 16px;
-  font-size: 22px;
-  font-weight: 500;
+:host {
+  display: block;
+}
+
+.cabecera-pagina {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  .titulo-pagina {
+    margin: 0;
+    font-size: clamp(1.8rem, 2vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: #0f172a;
+  }
+
+  a[mat-flat-button],
+  button[mat-flat-button] {
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+  }
 }
 
 .filtros {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  margin-bottom: 20px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 
   .filtro-busqueda {
     flex: 1 1 280px;
   }
 
   mat-form-field:not(.filtro-busqueda) {
-    flex: 0 1 200px;
+    flex: 0 1 210px;
   }
 }
 
 .vacio {
   text-align: center;
-  color: rgba(0, 0, 0, 0.6);
+  color: #64748b;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .tabla-escritorio {
-  overflow-x: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
 
   table {
     width: 100%;
+    background: transparent;
+  }
+
+  th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  td {
+    color: #0f172a;
+    font-size: 14px;
   }
 }
 
 .chip {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
 
   &.critica { background: rgba($critica, 0.12); color: $critica; }
-  &.alta    { background: rgba($alta, 0.12);    color: $alta; }
-  &.media   { background: rgba($media, 0.15);   color: $media; }
-  &.baja    { background: rgba($baja, 0.12);    color: $baja; }
+  &.alta    { background: rgba($alta, 0.12); color: $alta; }
+  &.media   { background: rgba($media, 0.12); color: #b45309; }
+  &.baja    { background: rgba($baja, 0.12); color: #047857; }
 }
 
 .lista-movil {
@@ -55,7 +110,11 @@ $baja: #2e7d32;
 
 .incidencia-card {
   margin-bottom: 12px;
+  border-radius: 18px;
   border-left-width: 4px;
+  border-left-style: solid;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.03);
 
   &.critica { border-left-color: $critica; }
   &.alta    { border-left-color: $alta; }
@@ -67,29 +126,42 @@ $baja: #2e7d32;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.6);
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
 }
 
 .incidencia-asunto {
-  margin: 8px 0 4px;
+  margin: 10px 0 8px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #0f172a;
 }
 
 .incidencia-meta {
   font-size: 13px;
-  color: rgba(0, 0, 0, 0.6);
+  color: #64748b;
 }
 
 .incidencia-pie {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
   margin-top: 12px;
   padding-top: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.6);
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  font-size: 12px;
+  color: #64748b;
+}
+
+.fila-click {
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(79, 70, 229, 0.03);
+  }
 }
 
 @media (max-width: 959px) {
@@ -101,19 +173,22 @@ $baja: #2e7d32;
     display: block;
   }
 
-  .filtros mat-form-field:not(.filtro-busqueda) {
-    flex: 1 1 140px;
+  .filtros {
+    padding: 14px;
+
+    mat-form-field:not(.filtro-busqueda) {
+      flex: 1 1 140px;
+    }
   }
 }
 
-.fila-click {
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.04);
+@media (max-width: 599px) {
+  .cabecera-pagina {
+    flex-direction: column;
+    align-items: flex-start;
   }
-}
 
-.incidencia-card {
-  cursor: pointer;
+  .filtros {
+    gap: 12px;
+  }
 }

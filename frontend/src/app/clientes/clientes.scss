@@ -1,18 +1,129 @@
-.formulario {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 4px 16px;
-  padding-top: 4px;
-  min-width: 320px;
+:host {
+  display: block;
+}
 
-  .completo {
-    grid-column: 1 / -1;
+.cabecera-pagina {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  .titulo-pagina {
+    margin: 0;
+    font-size: clamp(1.8rem, 2vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: #0f172a;
+  }
+
+  button[mat-flat-button] {
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+
+.vacio {
+  text-align: center;
+  color: #64748b;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.tabla-escritorio {
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+
+  table {
+    width: 100%;
+    background: transparent;
+  }
+
+  th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  td {
+    color: #0f172a;
+    font-size: 14px;
+  }
+}
+
+.acciones {
+  white-space: nowrap;
+  text-align: right;
+
+  button {
+    color: #475569;
+  }
+}
+
+.lista-movil {
+  display: none;
+}
+
+.cliente-card {
+  margin-bottom: 12px;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.03);
+}
+
+.cliente-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.cliente-empresa {
+  margin: 10px 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.cliente-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+@media (max-width: 959px) {
+  .tabla-escritorio {
+    display: none;
+  }
+
+  .lista-movil {
+    display: block;
   }
 }
 
 @media (max-width: 599px) {
-  .formulario {
-    grid-template-columns: minmax(0, 1fr);
-    min-width: 0;
+  .cabecera-pagina {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
