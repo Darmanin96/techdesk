@@ -1,0 +1,289 @@
+$fondo: #0a1020;
+$tarjeta: #0f1830;
+$campo: #0b1428;
+$borde: #22305a;
+$texto: #e8eefc;
+$apagado: #8fa0c4;
+$acento: #3b6cff;
+$acento-hover: #5580ff;
+$error: #ff6b6b;
+
+:host {
+  display: block;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: $texto;
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba($acento, 0.22), transparent 70%),
+    $fondo;
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border: 1px solid rgba(120, 150, 255, 0.15);
+  border-radius: 20px;
+  background: $tarjeta;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  animation: revelar 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes revelar {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+
+  .logo {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba($acento, 0.18);
+    color: #8fb0ff;
+  }
+
+  .nombre {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.subtitulo {
+  margin: 0 0 24px;
+  color: $apagado;
+  font-size: 14px;
+}
+
+.campo {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $apagado;
+  }
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid $borde;
+    border-radius: 10px;
+    background: $campo;
+    color: $texto;
+    font: inherit;
+    font-size: 15px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+
+    &::placeholder {
+      color: #566488;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $acento;
+      box-shadow: 0 0 0 3px rgba($acento, 0.25);
+    }
+
+    &.invalido {
+      border-color: $error;
+    }
+  }
+}
+
+.con-icono {
+  position: relative;
+
+  input {
+    padding-right: 46px;
+  }
+
+  .ojo {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    display: flex;
+    padding: 6px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: $apagado;
+    cursor: pointer;
+
+    &:hover {
+      color: $texto;
+    }
+  }
+}
+
+.msg-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: $error;
+}
+
+.alerta {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba($error, 0.12);
+  color: #ff9a9a;
+  font-size: 14px;
+}
+
+.btn-primario {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: $acento;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba($acento, 0.35);
+  transition: background 0.15s, transform 0.1s;
+
+  &:hover:not(:disabled) {
+    background: $acento-hover;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: girar 0.7s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.demo {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid $borde;
+}
+
+.demo-titulo {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $apagado;
+}
+
+.demo-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border: 1px solid $borde;
+  border-radius: 10px;
+  background: $campo;
+}
+
+.demo-datos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.demo-rol {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.demo-correo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'Space Mono', ui-monospace, Consolas, monospace;
+  font-size: 11px;
+  color: $apagado;
+}
+
+.btn-usar {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border: 1px solid rgba($acento, 0.5);
+  border-radius: 8px;
+  background: rgba($acento, 0.15);
+  color: #9db8ff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba($acento, 0.3);
+  }
+}
+
+.demo-nota {
+  margin: 12px 0 0;
+  font-family: 'Space Mono', ui-monospace, Consolas, monospace;
+  font-size: 11px;
+  color: $apagado;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta,
+  .spinner {
+    animation: none;
+  }
+}

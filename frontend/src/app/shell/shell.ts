@@ -8,11 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { Observable, map, shareReplay, take } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { Auth, Rol } from '../core/auth';
 
 interface NavItem {
   label: string;
   route: string;
   icon: string;
+  roles: Rol[];
 }
 
 @Component({
@@ -33,14 +35,21 @@ interface NavItem {
 })
 export class Shell {
   private breakpointObserver = inject(BreakpointObserver);
+  protected readonly auth = inject(Auth);
 
-  navItems: NavItem[] = [
-    { label: 'Dashboard', route: '/dashboard', icon: 'dashboard' },
-    { label: 'Incidencias', route: '/incidencias', icon: 'confirmation_number' },
-    { label: 'Clientes', route: '/clientes', icon: 'group' },
-    { label: 'Técnicos', route: '/tecnicos', icon: 'build' },
-    { label: 'Dispositivos', route: '/dispositivos', icon: 'devices' },
+  private readonly todos: NavItem[] = [
+    { label: 'Dashboard', route: '/dashboard', icon: 'dashboard', roles: ['admin', 'tecnico'] },
+    { label: 'Incidencias', route: '/incidencias', icon: 'confirmation_number', roles: ['admin', 'tecnico', 'cliente'] },
+    { label: 'Clientes', route: '/clientes', icon: 'group', roles: ['admin'] },
+    { label: 'Técnicos', route: '/tecnicos', icon: 'build', roles: ['admin'] },
+    { label: 'Dispositivos', route: '/dispositivos', icon: 'devices', roles: ['admin', 'tecnico'] },
   ];
+
+  // Solo los apartados que el rol del usuario puede ver
+  get navItems(): NavItem[] {
+    const rol = this.auth.usuario()?.rol;
+    return this.todos.filter((i) => rol && i.roles.includes(rol));
+  }
 
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe(['(max-width: 959px)'])

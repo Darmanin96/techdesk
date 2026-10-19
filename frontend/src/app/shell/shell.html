@@ -23,6 +23,14 @@
         </a>
       }
     </mat-nav-list>
+
+    <!-- Anclado al fondo de la barra lateral -->
+    <mat-nav-list class="shell-footer">
+      <button mat-list-item class="cerrar-sesion" (click)="auth.logout()">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle>Cerrar sesión</span>
+      </button>
+    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>

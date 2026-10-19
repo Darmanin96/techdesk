@@ -1,129 +1,445 @@
+$texto: #0f172a;
+$apagado: #64748b;
+$tenue: #94a3b8;
+$borde: #e2e8f0;
+$acento: #4f46e5;
+$editar: #2563eb;
+$eliminar: #dc2626;
+
 :host {
   display: block;
+  color: $texto;
 }
 
-.cabecera-pagina {
+.cabecera {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 20px;
 
-  .titulo-pagina {
+  h1 {
     margin: 0;
-    font-size: clamp(1.8rem, 2vw, 2.5rem);
+    font-size: 2rem;
     font-weight: 700;
-    letter-spacing: -0.05em;
-    color: #0f172a;
-  }
-
-  button[mat-flat-button] {
-    border-radius: 12px;
-    padding: 10px 18px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-    color: #fff;
-    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+    letter-spacing: -0.03em;
   }
 }
 
-mat-form-field {
-  width: 100%;
-  max-width: 420px;
+.btn-nuevo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 14px;
+  background: $acento;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba($acento, 0.3);
+  transition: transform 0.1s, box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 10px 24px rgba($acento, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
-.vacio {
-  text-align: center;
-  color: #64748b;
-  border-radius: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(255, 255, 255, 0.7);
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid #dbe3f5;
+  border-radius: 999px;
+  background: #fff;
+  color: #475569;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+
+  b {
+    font-weight: 600;
+    color: $tenue;
+  }
+
+  &:hover {
+    border-color: #c7d2fe;
+  }
+
+  &.activa {
+    background: #eef0ff;
+    border-color: #c7d2fe;
+    color: #4338ca;
+
+    b {
+      color: $acento;
+    }
+  }
 }
 
-.tabla-escritorio {
-  overflow: hidden;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
 
-  table {
-    width: 100%;
+.buscador,
+.limpiar {
+  height: 44px;
+  box-sizing: border-box;
+  border: 1px solid $borde;
+  border-radius: 12px;
+  background: #fff;
+  color: $texto;
+  font: inherit;
+  font-size: 14px;
+}
+
+.buscador {
+  flex: 1 1 280px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+
+  mat-icon {
+    color: $tenue;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
     background: transparent;
+    font: inherit;
+    color: $texto;
   }
 
-  th {
-    background: #f8fafc;
-    color: #64748b;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 700;
+  &:focus-within {
+    border-color: $acento;
+    box-shadow: 0 0 0 3px rgba($acento, 0.15);
+  }
+}
+
+.limpiar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  cursor: pointer;
+  color: $apagado;
+
+  &:hover {
+    color: $texto;
+    border-color: #cbd5e1;
   }
 
-  td {
-    color: #0f172a;
-    font-size: 14px;
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.resumen {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: $apagado;
+}
+
+.tabla {
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.cabecera-tabla,
+.fila {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr) 150px 88px;
+  align-items: center;
+  gap: 16px;
+}
+
+.cabecera-tabla {
+  padding: 14px 20px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $tenue;
+}
+
+.fila {
+  padding: 14px 20px;
+  border-top: 1px solid #eef2f7;
+  font-size: 14px;
+  animation: aparecer 0.35s ease-out both;
+  transition: background 0.12s;
+
+  &:hover {
+    background: #f8faff;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.celda-cliente {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.textos {
+  min-width: 0;
+}
+
+.nombre {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.empresa,
+.telefono,
+.total {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: $apagado;
+}
+
+.email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.celda-contacto,
+.celda-incidencias {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.celda-incidencias {
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+
+  &.a0 { background: #e0e7ff; color: #3730a3; }
+  &.a1 { background: #ede9fe; color: #5b21b6; }
+  &.a2 { background: #d1fae5; color: #065f46; }
+  &.a3 { background: #fef3c7; color: #92400e; }
+}
+
+.chip {
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &.con-abiertas {
+    background: rgba(217, 119, 6, 0.12);
+    color: #b45309;
+  }
+
+  &.sin-abiertas {
+    border: 1px solid $borde;
+    color: $apagado;
+    font-weight: 500;
   }
 }
 
 .acciones {
-  white-space: nowrap;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
 
-  button {
-    color: #475569;
+.icono {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px) scale(1.08);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  // Editar: azul, el lápiz "escribe" al pasar el ratón
+  &.editar {
+    background: rgba($editar, 0.1);
+    color: $editar;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba($editar, 0.18);
+      box-shadow: 0 6px 14px rgba($editar, 0.25);
+
+      mat-icon {
+        animation: escribir 0.55s ease-in-out;
+      }
+    }
+  }
+
+  // Eliminar: rojo, la papelera se sacude al pasar el ratón
+  &.peligro {
+    background: rgba($eliminar, 0.1);
+    color: $eliminar;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba($eliminar, 0.18);
+      box-shadow: 0 6px 14px rgba($eliminar, 0.25);
+
+      mat-icon {
+        animation: sacudir 0.5s ease-in-out;
+      }
+    }
   }
 }
 
-.lista-movil {
-  display: none;
+@keyframes escribir {
+  0%   { transform: rotate(0) translate(0, 0); }
+  25%  { transform: rotate(-16deg) translate(-1px, 1px); }
+  50%  { transform: rotate(10deg) translate(1px, -1px); }
+  75%  { transform: rotate(-8deg); }
+  100% { transform: rotate(0) translate(0, 0); }
 }
 
-.cliente-card {
-  margin-bottom: 12px;
-  border-radius: 18px;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.03);
+@keyframes sacudir {
+  0%, 100% { transform: rotate(0); }
+  20%      { transform: rotate(-14deg); }
+  40%      { transform: rotate(12deg); }
+  60%      { transform: rotate(-9deg); }
+  80%      { transform: rotate(6deg); }
 }
 
-.cliente-cabecera {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.cliente-empresa {
-  margin: 10px 0 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #334155;
-}
-
-.cliente-contacto {
+.vacio {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 12px;
-  color: #64748b;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 16px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 18px;
+  background: #fff;
+  color: $apagado;
+  text-align: center;
+
+  mat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    color: $tenue;
+  }
+
+  p {
+    margin: 0;
+  }
 }
 
+// Móvil y tablet: cada fila pasa a ser una tarjeta
 @media (max-width: 959px) {
-  .tabla-escritorio {
+  .cabecera-tabla {
     display: none;
   }
 
-  .lista-movil {
-    display: block;
+  .fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    padding: 14px 16px;
+  }
+
+  .celda-cliente,
+  .celda-contacto {
+    flex: 1 1 100%;
+  }
+
+  .celda-incidencias {
+    flex: 1 1 auto;
+  }
+
+  .acciones {
+    margin-left: auto;
   }
 }
 
 @media (max-width: 599px) {
-  .cabecera-pagina {
-    flex-direction: column;
-    align-items: flex-start;
+  .cabecera h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fila,
+  .icono mat-icon {
+    animation: none !important;
+  }
+
+  .icono {
+    transition: none;
   }
 }

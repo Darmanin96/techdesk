@@ -15,7 +15,10 @@
   border-right: 0;
 }
 
-.shell-sidenav .mat-drawer-inner-container {
+
+:host ::ng-deep .shell-sidenav .mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
   background: transparent;
 }
 
@@ -69,6 +72,33 @@
 
 .active-link .mdc-list-item__primary-text {
   color: #ffffff !important;
+}
+
+// Bloque inferior: se pega al fondo de la barra lateral
+.shell-footer {
+  margin-top: auto;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.shell-footer .cerrar-sesion {
+  width: 100%;
+  margin-bottom: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: #fca5a5 !important;
+  --mat-list-list-item-label-text-color: #fca5a5;
+  --mat-list-list-item-leading-icon-color: #fca5a5;
+
+  &:hover {
+    background: rgba(248, 113, 113, 0.12);
+  }
+
+  mat-icon {
+    color: #fca5a5 !important;
+  }
 }
 
 .shell-toolbar {
